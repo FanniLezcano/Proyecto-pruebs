@@ -133,7 +133,7 @@ class Bienvenida extends StatelessWidget {
                       // SECCION ASESORES
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, "Asesores");
+                          Navigator.pushNamed(context, "Asesores2");
                         },
                         child: apartados(
                           title: " Asesores ",

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:remax_center/RBienvenida.dart';
+import 'package:remax_center/screens/screens.dart';
 
 class Seragente extends StatelessWidget {
   const Seragente({super.key});

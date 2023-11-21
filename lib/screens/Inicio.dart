@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:remax_center/Sesion.dart';
+import 'package:remax_center/screens/screens.dart';
 
 class Inicio extends StatelessWidget {
   const Inicio({super.key});

@@ -1,0 +1,14 @@
+export 'package:flutter/material.dart';
+export 'package:remax_center/screens/Darien.dart';
+export 'package:remax_center/screens/Agente.dart';
+export 'package:remax_center/screens/Asesores.dart';
+export 'package:remax_center/screens/Inicio.dart';
+export 'package:remax_center/screens/Inmuebles.dart';
+export 'package:remax_center/screens/Noticias.dart';
+export 'package:remax_center/screens/Propiedades.dart';
+export 'package:remax_center/screens/QuiSomos.dart';
+export 'package:remax_center/screens/RBienvenida.dart';
+export 'package:remax_center/screens/SRecuperar.dart';
+export 'package:remax_center/screens/SRegistro.dart';
+export 'package:remax_center/screens/SerAgente.dart';
+export 'package:remax_center/screens/Sesion.dart';

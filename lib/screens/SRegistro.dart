@@ -1,36 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:remax_center/RBienvenida.dart';
-import 'package:remax_center/SRecuperar.dart';
-import 'package:remax_center/SRegistro.dart';
+import 'package:remax_center/screens/screens.dart';
 
-class Sesion extends StatelessWidget {
-  const Sesion({super.key});
+class Registro extends StatelessWidget {
+  const Registro({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 26, 60, 212),
-              Color.fromARGB(255, 26, 60, 212),
-              Color.fromARGB(255, 26, 58, 199),
-              Color.fromARGB(255, 21, 50, 182),
-            
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          )
-        ),
-        child: SafeArea(
+      backgroundColor: Color.fromARGB(255, 101, 129, 255),
+      body: SafeArea(
           child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 180,
-              width: 180,
+              height: 100,
+              width: 100,
               child: Image.network(
                   "https://assets.stickpng.com/images/608abc9a0517f5000437cccd.png"),
             ),
@@ -53,13 +38,13 @@ class Sesion extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Sesion(),
+                        builder: (context) => Registro(),
                       ));
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(220, 250, 0, 17)),
                     child: Text(
-                      "Inicio Sesion",
+                      " Registro ",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -71,13 +56,13 @@ class Sesion extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Registro(),
+                        builder: (context) => Sesion(),
                       ));
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(171, 116, 99, 100)),
                     child: Text(
-                      " Registrarte ",
+                      "Iniciar Sesion",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -87,7 +72,31 @@ class Sesion extends StatelessWidget {
             ),
 
             SizedBox(
-              height: 20,
+              height: 10,
+            ),
+
+            //NOMBRE
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.person),
+                        border: InputBorder.none,
+                        hintText: "Nombre",
+                      ),
+                    ),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
             ),
 
             //CORREO
@@ -112,7 +121,7 @@ class Sesion extends StatelessWidget {
             ),
 
             SizedBox(
-              height: 15,
+              height: 10,
             ),
 
             //CONTRASEÑA
@@ -137,7 +146,31 @@ class Sesion extends StatelessWidget {
                   )),
             ),
             SizedBox(
-              height: 15,
+              height: 10,
+            ),
+            //CONFIRMACION DE CONTRASEÑA
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.lock),
+                        border: InputBorder.none,
+                        hintText: "Confirmar Contraseña",
+                      ),
+                    ),
+                  )),
+            ),
+            SizedBox(
+              height: 10,
             ),
 
             // BOTON INICIO DE SESION
@@ -150,55 +183,28 @@ class Sesion extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Center(
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Bienvenida(),
-                      ));
-                    },
-                    child: Text(
-                      "       Iniciar Sesion       ",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 255, 255, 255)),
-                    ))
-                ),
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Bienvenida(),
+                          ));
+                        },
+                        child: Text(
+                          "      Registrarte      ",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 255, 255, 255)),
+                        ))),
               ),
             ),
 
             SizedBox(
               height: 15,
             ),
-
-            //OLVIDASTE LA CONTRASEÑA
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "¿Olvidaste tu Contraseña?",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Recuperar(),
-                      ));
-                    },
-                    child: Text(
-                      "Recuperar",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent[700]),
-                    )),
-              ],
-            ),
           ],
         ),
       )),
-      ),
     );
   }
 }
