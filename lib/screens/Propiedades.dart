@@ -143,9 +143,9 @@ class Propiedades extends StatelessWidget {
                         child: Center(
                             child: TextButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Bienvenida(),
-                                  ));
+                                  // Navegar a PropiedadesDetalle con propiedades de operación "Venta"
+                                  Navigator.pushNamed(
+                                      context, 'PropiedadesDetalleVenta');
                                 },
                                 child: Text(
                                   "COMPRA",
@@ -171,12 +171,12 @@ class Propiedades extends StatelessWidget {
                         child: Center(
                             child: TextButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Bienvenida(),
-                                  ));
+                                  // Navegar a PropiedadesDetalle con propiedades de operación "Renta"
+                                  Navigator.pushNamed(
+                                      context, 'PropiedadesDetalleAlquiler');
                                 },
                                 child: Text(
-                                  "VENTA",
+                                  "ALQUILER",
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,

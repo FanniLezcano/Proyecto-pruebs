@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remax_center/screens/Asesores.dart';
+import 'package:remax_center/screens/PropiedadesDetalleAlquiler.dart';
+import 'package:remax_center/screens/PropiedadesDetalleVenta.dart';
 import 'package:remax_center/screens/screens.dart';
 import '../modelos/menuOptionModelo.dart';
 
@@ -20,7 +22,11 @@ class AppRoute {
     MenuOption("SerAgente", Icons.work, "Ser Agente", Seragente()),
     MenuOption("Darien", Icons.location_on, "Darien", Darien()),
     MenuOption("inmueble", Icons.location_city, "Inmueble", inmueble()),
-    MenuOption("Asesores2", Icons.people, "Asesores prueba", Asesores())
+    MenuOption("Asesores2", Icons.people, "Asesores prueba", Asesores()),
+    MenuOption("PropiedadesDetalleAlquiler", Icons.details, "Propiedades",
+        PropiedadesDetalleAlquiler()),
+    MenuOption("PropiedadesDetalleVenta", Icons.details, "Propiedades",
+        PropiedadesDetalleVenta())
   ];
 
   // Utilizar esta definición de rutas para admitir argumentos
@@ -48,6 +54,8 @@ class AppRoute {
     'SerAgente': (context) => const Seragente(),
     'Darien': (context) => const Darien(),
     'inmueble': (context) => const inmueble(),
-    'Asesores2': (context) => Asesores()
+    'Asesores2': (context) => Asesores(),
+    'PropiedadesDetalleVenta': (context) => PropiedadesDetalleVenta(),
+    'PropiedadesDetalleAlquiler': (context) => PropiedadesDetalleAlquiler()
   };
 }

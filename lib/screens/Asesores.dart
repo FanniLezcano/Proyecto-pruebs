@@ -189,7 +189,7 @@ class _AsesoresState extends State<Asesores> {
                               final asesor = snapshot.data![index];
                               return AsesorTile(
                                 icon: asesor.foto,
-                                title: asesor.nombre + " " + asesor.apellidoP,
+                                title: asesor.nombre + " " + asesor.apellidoM,
                                 title2: asesor.tipo,
                                 title3: asesor.especialidad,
                               );
