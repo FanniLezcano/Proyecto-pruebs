@@ -5,7 +5,6 @@ class Bienvenida extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color.fromARGB(221, 255, 255, 255),
       body: Stack(
@@ -122,92 +121,84 @@ class Bienvenida extends StatelessWidget {
                   height: 20,
                 ),
                 //SECCIONES
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      height: size.height * 0.60 - 20,
-                      width: 500,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.98,
-                        crossAxisSpacing: 30,
-                        mainAxisSpacing: 25,
-                        children: [
-                          // SECCION ASESORES
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Asesores2");
-                            },
-                            child: apartados(
-                              title: " Asesores ",
-                              assestssrc: "assets/discusion (3).png",
-                            ),
-                          ),
-                          //SECCION NOTICIAS
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Noticias");
-                            },
-                            child: apartados(
-                              title: "Noticias",
-                              assestssrc: "assets/periodico (2).png",
-                            ),
-                          ),
-                          //SECCION PROPIEDADES
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Propiedades");
-                            },
-                            child: apartados(
-                              title: "Inmuebles",
-                              assestssrc: "assets/activos.png",
-                            ),
-                          ),
-                          //SECCION "¿QUIENES SOMOS?"
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "QuiSomos");
-                            },
-                            child: apartados(
-                              title: "¿Quienes Somos?",
-                              assestssrc: "assets/acerca-de.png",
-                            ),
-                          ),
-                          //SECCION SOY AGENTE RE/MAX
-                          GestureDetector(
-                            onTap: () {},
-                            child: apartados(
-                              title: "Agente RE/MAX",
-                              assestssrc: "assets/trabajo-en-equipo (1).png",
-                            ),
-                          ),
-                          //SECCION QUIERO SER AGENTE
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "SerAgente");
-                            },
-                            child: apartados(
-                              title: "Quiero ser Agente",
-                              assestssrc: "assets/cv.png",
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "inmueble");
-                            },
-                            child: apartados(
-                              title: "Propiedades",
-                              assestssrc: "assets/activo-fijo.png",
-                            ),
-                          ),
-                        ],
+                Container(
+                  height: 595,
+                  width: 500,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.98,
+                    crossAxisSpacing: 30,
+                    mainAxisSpacing: 25,
+                    children: [
+                      // SECCION ASESORES
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "Asesores");
+                        },
+                        child: apartados(
+                          title: " Asesores ",
+                          assestssrc: "assets/discusion (3).png",
+                        ),
                       ),
-                    ),
+                      //SECCION NOTICIAS
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "Noticias");
+                        },
+                        child: apartados(
+                          title: "Noticias",
+                          assestssrc: "assets/periodico (2).png",
+                        ),
+                      ),
+                      //SECCION PROPIEDADES
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "Propiedades");
+                        },
+                        child: apartados(
+                          title: "Inmuebles",
+                          assestssrc: "assets/activos.png",
+                        ),
+                      ),
+                      //SECCION "¿QUIENES SOMOS?"
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "QuiSomos");
+                        },
+                        child: apartados(
+                          title: "¿Quienes Somos?",
+                          assestssrc: "assets/acerca-de.png",
+                        ),
+                      ),
+                      //SECCION SOY AGENTE RE/MAX
+                      GestureDetector(
+                        onTap: () {},
+                        child: apartados(
+                          title: "Agente RE/MAX",
+                          assestssrc: "assets/trabajo-en-equipo (1).png",
+                        ),
+                      ),
+                      //SECCION QUIERO SER AGENTE
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "SerAgente");
+                        },
+                        child: apartados(
+                          title: "Quiero ser Agente",
+                          assestssrc: "assets/cv.png",
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "inmueble");
+                        },
+                        child: apartados(
+                          title: "Propiedades",
+                          assestssrc: "assets/activo-fijo.png",
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                SizedBox(
-                  height: 20,
                 )
               ],
             ),

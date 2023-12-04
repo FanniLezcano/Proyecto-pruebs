@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
 import 'package:remax_center/providers/agentes_provider.dart';
+import 'package:remax_center/screens/Agentes_Search.dart';
 
 class Asesores extends StatefulWidget {
   @override
@@ -38,11 +39,16 @@ class _AsesoresState extends State<Asesores> {
                 icon: Icons.home,
                 text: "Inicio",
                 iconColor: Colors.white,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'RBienvenida');
+                },
               ),
               GButton(
                 icon: Icons.search,
                 text: "Buscar",
                 iconColor: Colors.white,
+                onPressed: () =>
+                    showSearch(context: context, delegate: AgentesSearch()),
               ),
               GButton(
                 icon: Icons.settings,
@@ -174,7 +180,10 @@ class _AsesoresState extends State<Asesores> {
                         } else if (!snapshot.hasData ||
                             snapshot.data!.isEmpty) {
                           return Center(
-                              child: Text('No hay datos disponibles.'));
+                              child: Text(
+                            'No hay datos disponibles.',
+                            style: TextStyle(color: Colors.white, fontSize: 22),
+                          ));
                         } else {
                           return GridView.builder(
                             gridDelegate:

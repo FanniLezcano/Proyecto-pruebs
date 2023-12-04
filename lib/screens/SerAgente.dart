@@ -7,6 +7,8 @@ class Seragente extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(9, 9, 44, 0.965),
         bottomNavigationBar: Container(
@@ -103,430 +105,405 @@ class Seragente extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    height: 675,
-                    child: ListView(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            "Somos la empresa que más Bienes Raíces vende en el mundo y tú puedes ser parte de ella. Intégrate a nuestra Red de Asesores Inmobiliarios y transforma tu vida y la de muchas personas.",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15),
-                          decoration: BoxDecoration(
-                              color: Colors.black54,
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //nombre
-                              Text(
-                                "Nombre(s)",
+                  SingleChildScrollView(
+                    child: Container(
+                      height: size.height * 0.70 - 30,
+                      child: Form(
+                        child: ListView(
+                          children: [
+                            ListTile(
+                              title: Text(
+                                "Somos la empresa que más Bienes Raíces vende en el mundo y tú puedes ser parte de ella. Intégrate a nuestra Red de Asesores Inmobiliarios y transforma tu vida y la de muchas personas.",
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.white,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              SizedBox(
-                                height: 5,
+                            ),
+                            SizedBox(height: 5),
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              //nombre
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "Nombre(s)",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText: "Nombre(s)",
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText: "Nombre(s)",
+                                          ),
                                         ),
                                       ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //APELLIDOS
-                              Text(
-                                "Apellidos",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //apellidos
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText: "Apellidos",
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "Apellidos",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText: "Apellidos",
+                                          ),
                                         ),
                                       ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //Genero y edad
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Genero:",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  SizedBox(
-                                    width: 150,
-                                  ),
-                                  Text(
-                                    "Edad:",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: SizedBox(
-                                        width: 174,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: TextField(
-                                            obscureText: true,
-                                            decoration: InputDecoration(
-                                              icon: Icon(Icons.lock),
-                                              border: InputBorder.none,
-                                              hintText: "Genero",
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Genero:",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(width: 150),
+                                      Text(
+                                        "Edad:",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: SizedBox(
+                                          width: 174,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
+                                            child: TextFormField(
+                                              decoration: InputDecoration(
+                                                icon: Icon(Icons.lock),
+                                                border: InputBorder.none,
+                                                hintText: "Genero",
+                                              ),
                                             ),
                                           ),
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: SizedBox(
-                                        width: 174,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              icon: Icon(Icons.lock),
-                                              border: InputBorder.none,
-                                              hintText: "Edad",
+                                        ),
+                                      ),
+                                      SizedBox(width: 15),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: Colors.white),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        child: SizedBox(
+                                          width: 174,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
+                                            child: TextFormField(
+                                              decoration: InputDecoration(
+                                                icon: Icon(Icons.lock),
+                                                border: InputBorder.none,
+                                                hintText: "Edad",
+                                              ),
                                             ),
                                           ),
-                                        )),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //correo
-                              Text(
-                                "Correo Electronico:",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //correo
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "Correo Electronico:",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText: "Correo Electronico",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //celular
-                              Text(
-                                "Numero de Celular:",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //celular
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText: "Celular",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //Nivel de ngles
-                              Text(
-                                "¿Que nivel consideras tener para el Idioma Inglés?",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //nivel de ingles
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText: "Nivel de Ingles",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //donde vives
-                              Text(
-                                "¿En qué parte de la ciudad vives?",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //donde vives
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText:
-                                              "¿En qué parte de la ciudad vives?",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //sobre nosotros
-                              Text(
-                                "¿Cómo te enteraste de nosotros?",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //Sobre nosotros
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText:
-                                              "¿Cómo te enteraste de nosotros?",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ////Interes en re/max
-                              Text(
-                                "Platícanos sobre tu interés en unirte a RE/MAX",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              //Interes en re/max
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 25),
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(left: 20),
-                                      child: TextField(
-                                        obscureText: true,
-                                        decoration: InputDecoration(
-                                          icon: Icon(Icons.lock),
-                                          border: InputBorder.none,
-                                          hintText:
-                                              "Platícanos sobre tu interés en unirte a RE/MAX",
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 100),
-                                child: Container(
-                                  padding: EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    color: Colors.redAccent[700],
-                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: Center(
-                                      child: TextButton(
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText: "Correo Electronico",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "Numero de Celular:",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText: "Celular",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "¿Que nivel consideras tener para el Idioma Inglés?",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText: "Nivel de Ingles",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "¿En qué parte de la ciudad vives?",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText:
+                                                "¿En qué parte de la ciudad vives?",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "¿Cómo te enteraste de nosotros?",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText:
+                                                "¿Cómo te enteraste de nosotros?",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    "Platícanos sobre tu interés en unirte a RE/MAX",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.white),
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(left: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            icon: Icon(Icons.lock),
+                                            border: InputBorder.none,
+                                            hintText:
+                                                "Platícanos sobre tu interés en unirte a RE/MAX",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 100),
+                                    child: Container(
+                                      padding: EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                        color: Colors.redAccent[700],
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Center(
+                                        child: TextButton(
                                           onPressed: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Bienvenida(),
-                                            ));
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Bienvenida(),
+                                              ),
+                                            );
                                           },
-                                          child: Text(
-                                            "       Postulate       ",
-                                            style: TextStyle(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 5),
+                                            child: Text(
+                                              "Postulate",
+                                              style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,
                                                 color: const Color.fromARGB(
-                                                    255, 255, 255, 255)),
-                                          ))),
-                                ),
+                                                    255, 255, 255, 255),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                ],
                               ),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],

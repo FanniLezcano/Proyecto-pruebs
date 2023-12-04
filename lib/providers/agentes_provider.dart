@@ -11,7 +11,17 @@ class AgentesProvider {
     } catch (e) {
       print('Error al obtener agentes: $e');
       agentesList =
-          []; // or handle the error in a way that makes sense for your application
+          []; // o manejar el error de otra manera, por ejemplo, lanzando una excepción
+    }
+  }
+
+  Future<void> searchAgentes(String name) async {
+    try {
+      agentesList = await agentesController.searchAgentes(name);
+    } catch (e) {
+      print('Error al buscar agentes: $e');
+      agentesList =
+          []; // o manejar el error de otra manera, por ejemplo, lanzando una excepción
     }
   }
 }

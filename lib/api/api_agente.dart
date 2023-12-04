@@ -16,4 +16,19 @@ class AgentesController {
       return []; // o manejar el error de otra manera, por ejemplo, lanzando una excepción
     }
   }
+
+  Future<List<Agentes>> searchAgentes(String name) async {
+    try {
+      final List<Map<String, dynamic>> responseData =
+          await ApiConnector().get('agentes/search?name=$name');
+
+      final List<Agentes> agentesList =
+          responseData.map((json) => Agentes.fromJson(json)).toList();
+
+      return agentesList;
+    } catch (e) {
+      print('Error al buscar agentes en la API: $e');
+      return [];
+    }
+  }
 }
