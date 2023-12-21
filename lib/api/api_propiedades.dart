@@ -1,14 +1,14 @@
 import 'package:remax_center/api/api_conexion.dart';
 import 'package:remax_center/modelos/propiedades_modelo.dart';
 
-class PropiedadesController {
-  Future<List<Propiedades>> getPropiedades() async {
+class ApiPropiedades {
+  Future<List<PropiedadModelo>> getPropiedades() async {
     try {
       final List<Map<String, dynamic>> responseData =
           await ApiConnector().get('propiedades');
 
-      final List<Propiedades> propiedadesList =
-          responseData.map((json) => Propiedades.fromJson(json)).toList();
+      final List<PropiedadModelo> propiedadesList =
+          responseData.map((json) => PropiedadModelo.fromJson(json)).toList();
 
       return propiedadesList;
     } catch (e) {
@@ -17,15 +17,15 @@ class PropiedadesController {
     }
   }
 
-  Future<List<Propiedades>> getPropiedadesVenta() async {
+  Future<List<PropiedadModelo>> getPropiedadesVenta() async {
     try {
       final List<Map<String, dynamic>> responseData =
           await ApiConnector().get('propiedades');
 
-      final List<Propiedades> propiedadesList =
-          responseData.map((json) => Propiedades.fromJson(json)).toList();
+      final List<PropiedadModelo> propiedadesList =
+          responseData.map((json) => PropiedadModelo.fromJson(json)).toList();
 
-      final List<Propiedades> propiedadesFiltradasVenta = propiedadesList
+      final List<PropiedadModelo> propiedadesFiltradasVenta = propiedadesList
           .where((element) => element.operacion == "Venta")
           .toList();
 
@@ -36,15 +36,15 @@ class PropiedadesController {
     }
   }
 
-  Future<List<Propiedades>> getPropiedadesRenta() async {
+  Future<List<PropiedadModelo>> getPropiedadesRenta() async {
     try {
       final List<Map<String, dynamic>> responseData =
           await ApiConnector().get('propiedades?operacion=renta');
 
-      final List<Propiedades> propiedadesList =
-          responseData.map((json) => Propiedades.fromJson(json)).toList();
+      final List<PropiedadModelo> propiedadesList =
+          responseData.map((json) => PropiedadModelo.fromJson(json)).toList();
 
-      final List<Propiedades> propiedadesFiltradasRenta = propiedadesList
+      final List<PropiedadModelo> propiedadesFiltradasRenta = propiedadesList
           .where((element) => element.operacion == "Renta")
           .toList();
 

@@ -1,27 +1,38 @@
+import 'package:flutter/material.dart';
 import 'package:remax_center/api/api_agente.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
 
-class AgentesProvider {
-  final AgentesController agentesController = AgentesController();
-  late List<Agentes> agentesList;
+class AgentesProvider extends ChangeNotifier {
+  final ApiAgentes _apiAgentes = ApiAgentes();
 
-  Future<void> getAgentes() async {
+  List<AgentesModelo> _agentesList = [];
+
+  List<AgentesModelo> get agentesList => _agentesList;
+
+  Future<List<AgentesModelo>> getAgentes() async {
     try {
-      agentesList = await agentesController.getAgentes();
+      this._agentesList = await _apiAgentes.getAgentes();
+      notifyListeners();
+      return _agentesList;
     } catch (e) {
       print('Error al obtener agentes: $e');
-      agentesList =
-          []; // o manejar el error de otra manera, por ejemplo, lanzando una excepción
+      return [];
     }
   }
 
-  Future<void> searchAgentes(String name) async {
+  Future<List<AgentesModelo>> searchAgentes(String name) async {
     try {
-      agentesList = await agentesController.searchAgentes(name);
+      final List<AgentesModelo> searchedAgentes =
+          await _apiAgentes.searchAgentes(name);
+      _agentesList = searchedAgentes;
+      notifyListeners();
+      return _agentesList;
     } catch (e) {
       print('Error al buscar agentes: $e');
-      agentesList =
-          []; // o manejar el error de otra manera, por ejemplo, lanzando una excepción
+      _agentesList = [];
+      notifyListeners();
+      return _agentesList;
+      // o manejar el error de otra manera, por ejemplo, lanzando una excepción
     }
   }
 }

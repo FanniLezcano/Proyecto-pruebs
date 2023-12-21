@@ -1,37 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:remax_center/api/api_propiedades.dart';
-import 'package:remax_center/screens/Propiedades.dart';
+import 'package:remax_center/modelos/propiedades_modelo.dart';
 
-class PropiedadesProvider {
-  final PropiedadesController propiedadesController = PropiedadesController();
-  late List<Propiedades> propiedadesList;
+class PropiedadesProvider extends ChangeNotifier {
+  final ApiPropiedades _apiPropiedades = ApiPropiedades();
 
-  Future<void> getPropiedades() async {
+  List<PropiedadModelo> _propiedadesList = [];
+  List<PropiedadModelo> _propiedadesVentaList = [];
+  List<PropiedadModelo> _propiedadesRentaList = [];
+
+  List<PropiedadModelo> get propiedadesList => _propiedadesList;
+  List<PropiedadModelo> get propiedadesVentaList => _propiedadesVentaList;
+  List<PropiedadModelo> get propiedadesRentaList => _propiedadesRentaList;
+
+  Future<void> fetchPropiedades() async {
     try {
-      propiedadesList =
-          (await propiedadesController.getPropiedades()).cast<Propiedades>();
+      final List<PropiedadModelo> propiedadesList =
+          await _apiPropiedades.getPropiedades();
+      _propiedadesList = propiedadesList;
+      notifyListeners();
     } catch (e) {
       print('Error al obtener propiedades: $e');
-      propiedadesList = [];
     }
   }
 
-  Future<void> getPropiedadesVenta() async {
+  Future<List<PropiedadModelo>> fetchPropiedadesVenta() async {
     try {
-      propiedadesList = (await propiedadesController.getPropiedadesVenta())
-          .cast<Propiedades>();
+      this._propiedadesVentaList = await _apiPropiedades.getPropiedadesVenta();
+      notifyListeners();
+      return _propiedadesVentaList;
     } catch (e) {
       print('Error al obtener propiedades en venta: $e');
-      propiedadesList = [];
+      return [];
     }
   }
 
-  Future<void> getPropiedadesRenta() async {
+  Future<List<PropiedadModelo>> fetchPropiedadesRenta() async {
     try {
-      propiedadesList = (await propiedadesController.getPropiedadesRenta())
-          .cast<Propiedades>();
+      this._propiedadesRentaList = await _apiPropiedades.getPropiedadesRenta();
+      notifyListeners();
+      return _propiedadesRentaList;
     } catch (e) {
       print('Error al obtener propiedades en renta: $e');
-      propiedadesList = [];
+      return [];
     }
   }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:remax_center/screens/screens.dart';
 
-class Propiedades extends StatelessWidget {
-  const Propiedades({super.key});
+class PropiedadesScreen extends StatelessWidget {
+  const PropiedadesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

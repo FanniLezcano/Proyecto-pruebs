@@ -1,14 +1,14 @@
 import 'package:remax_center/api/api_conexion.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
 
-class AgentesController {
-  Future<List<Agentes>> getAgentes() async {
+class ApiAgentes {
+  Future<List<AgentesModelo>> getAgentes() async {
     try {
       final List<Map<String, dynamic>> responseData =
           await ApiConnector().get('agentes');
 
-      final List<Agentes> agentesList =
-          responseData.map((json) => Agentes.fromJson(json)).toList();
+      final List<AgentesModelo> agentesList =
+          responseData.map((json) => AgentesModelo.fromJson(json)).toList();
 
       return agentesList;
     } catch (e) {
@@ -17,13 +17,13 @@ class AgentesController {
     }
   }
 
-  Future<List<Agentes>> searchAgentes(String name) async {
+  Future<List<AgentesModelo>> searchAgentes(String name) async {
     try {
       final List<Map<String, dynamic>> responseData =
           await ApiConnector().get('agentes/search?name=$name');
 
-      final List<Agentes> agentesList =
-          responseData.map((json) => Agentes.fromJson(json)).toList();
+      final List<AgentesModelo> agentesList =
+          responseData.map((json) => AgentesModelo.fromJson(json)).toList();
 
       return agentesList;
     } catch (e) {

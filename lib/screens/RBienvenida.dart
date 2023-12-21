@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Bienvenida extends StatelessWidget {
   const Bienvenida({super.key});
@@ -21,200 +22,211 @@ class Bienvenida extends StatelessWidget {
                         Color.fromARGB(97, 0, 0, 0), BlendMode.darken))),
           ),
           //ICONO DE PERFIL
-          SafeArea(
-              child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                //ICONO DE PERFIL
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      color: Colors.indigo[100],
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                //IMAGEN RE/MAX HOME CENTER
-                Container(
-                  height: 120,
-                  width: 400,
-                  decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 2, 36, 95)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //TEXTO REMAX Y EL GLOBO
-                      Text(
-                        "RE",
-                        style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                      Text(
-                        "/",
-                        style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 247, 21, 21)),
-                      ),
-                      Text(
-                        "MAX",
-                        style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                      Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5)),
-                      //GLOBO
-                      Container(
-                        height: 90,
-                        width: 90,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    "https://assets.stickpng.com/images/608abc9a0517f5000437cccd.png"))),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1, horizontal: 35),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                //MENSAJE DE BIENVENIDA
-                Text(
-                  "¡Hola, Somos RE/MAX!",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "¿En que podemos ayudarte?",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                Container(
-                  height: 20,
-                ),
-                //SECCIONES
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SingleChildScrollView(
+          SingleChildScrollView(
+            child: SafeArea(
+                child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  //ICONO DE PERFIL
+                  Align(
+                    alignment: Alignment.centerRight,
                     child: Container(
-                      height: size.height * 0.60 - 20,
-                      width: 500,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.98,
-                        crossAxisSpacing: 30,
-                        mainAxisSpacing: 25,
-                        children: [
-                          // SECCION ASESORES
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Asesores2");
-                            },
-                            child: apartados(
-                              title: " Asesores ",
-                              assestssrc: "assets/discusion (3).png",
-                            ),
-                          ),
-                          //SECCION NOTICIAS
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Noticias");
-                            },
-                            child: apartados(
-                              title: "Noticias",
-                              assestssrc: "assets/periodico (2).png",
-                            ),
-                          ),
-                          //SECCION PROPIEDADES
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "Propiedades");
-                            },
-                            child: apartados(
-                              title: "Inmuebles",
-                              assestssrc: "assets/activos.png",
-                            ),
-                          ),
-                          //SECCION "¿QUIENES SOMOS?"
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "QuiSomos");
-                            },
-                            child: apartados(
-                              title: "¿Quienes Somos?",
-                              assestssrc: "assets/acerca-de.png",
-                            ),
-                          ),
-                          //SECCION SOY AGENTE RE/MAX
-                          GestureDetector(
-                            onTap: () {},
-                            child: apartados(
-                              title: "Agente RE/MAX",
-                              assestssrc: "assets/trabajo-en-equipo (1).png",
-                            ),
-                          ),
-                          //SECCION QUIERO SER AGENTE
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "SerAgente");
-                            },
-                            child: apartados(
-                              title: "Quiero ser Agente",
-                              assestssrc: "assets/cv.png",
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "inmueble");
-                            },
-                            child: apartados(
-                              title: "Propiedades",
-                              assestssrc: "assets/activo-fijo.png",
-                            ),
-                          ),
-                        ],
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        color: Colors.indigo[100],
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 30,
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                )
-              ],
-            ),
-          )),
+                  Align(
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //IMAGEN RE/MAX HOME CENTER
+                  Container(
+                    height: 120,
+                    width: 400,
+                    decoration:
+                        BoxDecoration(color: Color.fromARGB(255, 2, 36, 95)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        //TEXTO REMAX Y EL GLOBO
+                        Text(
+                          "RE",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                        Text(
+                          "/",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 247, 21, 21)),
+                        ),
+                        Text(
+                          "MAX",
+                          style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5)),
+                        //GLOBO
+                        Container(
+                          height: 90,
+                          width: 90,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://assets.stickpng.com/images/608abc9a0517f5000437cccd.png"))),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 35),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  //MENSAJE DE BIENVENIDA
+                  Text(
+                    "¡Hola, Somos RE/MAX!",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    "¿En que podemos ayudarte?",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  Container(
+                    height: 20,
+                  ),
+                  //SECCIONES
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SingleChildScrollView(
+                      child: Container(
+                        height: size.height * 0.60 - 20,
+                        width: 500,
+                        child: GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.98,
+                          crossAxisSpacing: 30,
+                          mainAxisSpacing: 25,
+                          children: [
+                            // SECCION ASESORES
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "Asesores2");
+                              },
+                              child: apartados(
+                                title: " Asesores ",
+                                assestssrc: "assets/discusion (3).png",
+                              ),
+                            ),
+                            //SECCION NOTICIAS
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "Noticias");
+                              },
+                              child: apartados(
+                                title: "Noticias",
+                                assestssrc: "assets/periodico (2).png",
+                              ),
+                            ),
+                            //SECCION PROPIEDADES
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "Propiedades");
+                              },
+                              child: apartados(
+                                title: "Inmuebles",
+                                assestssrc: "assets/activos.png",
+                              ),
+                            ),
+                            //SECCION "¿QUIENES SOMOS?"
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "QuiSomos");
+                              },
+                              child: apartados(
+                                title: "¿Quienes Somos?",
+                                assestssrc: "assets/acerca-de.png",
+                              ),
+                            ),
+                            //SECCION SOY AGENTE RE/MAX
+                            GestureDetector(
+                              onTap: () {
+                                _openURL();
+                              },
+                              child: apartados(
+                                title: "Agente RE/MAX",
+                                assestssrc: "assets/trabajo-en-equipo (1).png",
+                              ),
+                            ),
+                            //SECCION QUIERO SER AGENTE
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "SerAgente");
+                              },
+                              child: apartados(
+                                title: "Quiero ser Agente",
+                                assestssrc: "assets/cv.png",
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, "inmueble");
+                              },
+                              child: apartados(
+                                title: "Propiedades",
+                                assestssrc: "assets/activo-fijo.png",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
+            )),
+          ),
         ],
       ),
     );
+  }
+}
+
+void _openURL() async {
+  final Uri url = Uri.parse('https://remax.com.mx/');
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
   }
 }
 

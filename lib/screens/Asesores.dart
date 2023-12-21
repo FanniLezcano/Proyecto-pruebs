@@ -167,9 +167,8 @@ class _AsesoresState extends State<Asesores> {
                   ),
                   SizedBox(height: 10),
                   Expanded(
-                    child: FutureBuilder<List<Agentes>>(
-                      future: agentesProviderController.agentesController
-                          .getAgentes(),
+                    child: FutureBuilder<List<AgentesModelo>>(
+                      future: agentesProviderController.getAgentes(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -197,11 +196,11 @@ class _AsesoresState extends State<Asesores> {
                             itemBuilder: (context, index) {
                               final asesor = snapshot.data![index];
                               return AsesorTile(
-                                icon: asesor.foto,
-                                title: asesor.nombre + " " + asesor.apellidoM,
-                                title2: asesor.tipo,
-                                title3: asesor.especialidad,
-                              );
+                                  icon: asesor.foto,
+                                  title: asesor.nombre + " " + asesor.apellidoM,
+                                  title2: asesor.tipo,
+                                  title3: asesor.especialidad,
+                                  asesor: asesor);
                             },
                           );
                         }
@@ -219,6 +218,7 @@ class _AsesoresState extends State<Asesores> {
 }
 
 class AsesorTile extends StatelessWidget {
+  final AgentesModelo asesor;
   final String icon;
   final String title;
   final String title2;
@@ -229,49 +229,58 @@ class AsesorTile extends StatelessWidget {
       required this.icon,
       required this.title,
       required this.title2,
-      required this.title3})
+      required this.title3,
+      required this.asesor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color.fromARGB(31, 255, 255, 255),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 22),
-          Container(
-            height: 110,
-            width: 110,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/no_image.jpg"),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'Darien', arguments: asesor);
+      },
+      child: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: Color.fromARGB(31, 255, 255, 255),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        margin: EdgeInsets.all(0), // Ajusta según sea necesario
+        padding: EdgeInsets.all(0), // Ajusta según sea necesario
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 130,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                clipBehavior: Clip.antiAlias, // Prueba con esta configuración
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/cargando2.gif'),
+                  image: icon != null
+                      ? AssetImage('assets/$icon')
+                      : AssetImage('assets/no_image.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              color: Colors.indigo[100],
-              shape: BoxShape.circle,
             ),
-          ),
-          SizedBox(height: 10),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            SizedBox(height: 10), // Ajusta según sea necesario
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ),
-          Text(
-            title2,
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-          Text(
-            title3,
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
-        ],
+            Text(
+              title2,
+              style: TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }

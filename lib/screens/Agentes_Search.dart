@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
 import 'package:remax_center/providers/agentes_provider.dart';
 
@@ -56,89 +57,92 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/Fondos/fondo5.jpg"),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  const Color.fromARGB(166, 0, 0, 0),
-                  BlendMode.darken,
+    return ChangeNotifierProvider(
+      create: (context) => AgentesProvider(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/Fondos/fondo5.jpg"),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    const Color.fromARGB(166, 0, 0, 0),
+                    BlendMode.darken,
+                  ),
                 ),
               ),
             ),
-          ),
-          ShaderMask(
-            shaderCallback: (Rect) {
-              return LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color.fromARGB(255, 0, 0, 0),
-                  const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
-                  const Color.fromARGB(255, 0, 0, 0).withOpacity(0.0),
-                ],
-                stops: [0.0, 0.4, 0.9],
-              ).createShader(Rect);
-            },
-            blendMode: BlendMode.dstOut,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
+            ShaderMask(
+              shaderCallback: (Rect) {
+                return LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    const Color.fromARGB(255, 152, 176, 255),
-                    Color.fromARGB(255, 13, 59, 207),
+                    const Color.fromARGB(255, 0, 0, 0),
+                    const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
+                    const Color.fromARGB(255, 0, 0, 0).withOpacity(0.0),
                   ],
+                  stops: [0.0, 0.4, 0.9],
+                ).createShader(Rect);
+              },
+              blendMode: BlendMode.dstOut,
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      const Color.fromARGB(255, 152, 176, 255),
+                      Color.fromARGB(255, 13, 59, 207),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          Expanded(
-              child: FutureBuilder<List<Agentes>>(
-                  future: agentesProviderController.agentesController
-                      .searchAgentes(widget.query),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(
-                          child: Text('No hay datos disponibles.',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 22)));
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            childAspectRatio: 0.85,
+            SizedBox(height: 20),
+            Expanded(
+                child: FutureBuilder<List<AgentesModelo>>(
+                    future:
+                        agentesProviderController.searchAgentes(widget.query),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Center(
+                            child: Text('No hay datos disponibles.',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 22)));
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 0.85,
+                            ),
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              final asesor = snapshot.data![index];
+                              return AsesorTile(
+                                icon: asesor.foto,
+                                title: asesor.nombre + " " + asesor.apellidoM,
+                                title2: asesor.tipo,
+                                title3: asesor.especialidad,
+                              );
+                            },
                           ),
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            final asesor = snapshot.data![index];
-                            return AsesorTile(
-                              icon: asesor.foto,
-                              title: asesor.nombre + " " + asesor.apellidoM,
-                              title2: asesor.tipo,
-                              title3: asesor.especialidad,
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  }))
-        ],
+                        );
+                      }
+                    }))
+          ],
+        ),
       ),
     );
   }

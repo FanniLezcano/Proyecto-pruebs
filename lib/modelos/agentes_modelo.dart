@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-class Agentes {
+class AgentesModelo {
   int id;
   String nombre;
   String apellidoM;
@@ -20,7 +18,7 @@ class Agentes {
   DateTime fechaNacimiento;
   DateTime unionRemax;
 
-  Agentes({
+  AgentesModelo({
     required this.id,
     required this.nombre,
     required this.apellidoM,
@@ -41,7 +39,7 @@ class Agentes {
     required this.unionRemax,
   });
 
-  factory Agentes.fromJson(Map<String, dynamic> json) => Agentes(
+  factory AgentesModelo.fromJson(Map<String, dynamic> json) => AgentesModelo(
         id: json["id"],
         nombre: json["nombre"],
         apellidoM: json["apellidoM"],

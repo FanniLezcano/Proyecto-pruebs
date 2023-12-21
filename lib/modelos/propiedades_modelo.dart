@@ -1,4 +1,4 @@
-class Propiedades {
+class PropiedadModelo {
   final String id;
   final int idAgente;
   final int idDetalle;
@@ -7,9 +7,9 @@ class Propiedades {
   final int idDueno;
   final int idMunicipio;
   final int idColonia;
-  final int precio;
-  final int precioDesde;
-  final int precioHasta;
+  final double precio;
+  final double precioDesde;
+  final double precioHasta;
   final String moneda;
   final String sector;
   final String tipo;
@@ -20,8 +20,8 @@ class Propiedades {
   final String calle;
   final String numeroExterior;
   final String numeroInterior;
-  final num longitud;
-  final num latitud;
+  final double longitud;
+  final double latitud;
   final String titulo;
   final String caracteristicas;
   final String manta;
@@ -33,11 +33,12 @@ class Propiedades {
   final String exclusividad;
   final String propuesta;
   final String ventaPendiente;
-  final DateTime fechaRegistro;
+  final String fechaRegistro;
   final String archivada;
   final int visitas;
+  final List<Imagen> imagenes;
 
-  Propiedades({
+  PropiedadModelo({
     required this.id,
     required this.idAgente,
     required this.idDetalle,
@@ -75,10 +76,11 @@ class Propiedades {
     required this.fechaRegistro,
     required this.archivada,
     required this.visitas,
+    required this.imagenes,
   });
 
-  factory Propiedades.fromJson(Map<String, dynamic> json) {
-    return Propiedades(
+  factory PropiedadModelo.fromJson(Map<String, dynamic> json) {
+    return PropiedadModelo(
       id: json['id'],
       idAgente: json['idAgente'],
       idDetalle: json['idDetalle'],
@@ -87,9 +89,9 @@ class Propiedades {
       idDueno: json['idDueno'],
       idMunicipio: json['idMunicipio'],
       idColonia: json['idColonia'],
-      precio: json['precio'],
-      precioDesde: json['precioDesde'],
-      precioHasta: json['precioHasta'],
+      precio: json['precio'].toDouble(),
+      precioDesde: json['precioDesde'].toDouble(),
+      precioHasta: json['precioHasta'].toDouble(),
       moneda: json['moneda'],
       sector: json['sector'],
       tipo: json['tipo'],
@@ -100,8 +102,8 @@ class Propiedades {
       calle: json['calle'],
       numeroExterior: json['numeroExterior'],
       numeroInterior: json['numeroInterior'],
-      longitud: json['longitud'],
-      latitud: json['latitud'],
+      longitud: json['longitud'].toDouble(),
+      latitud: json['latitud'].toDouble(),
       titulo: json['titulo'],
       caracteristicas: json['caracteristicas'],
       manta: json['manta'],
@@ -113,9 +115,38 @@ class Propiedades {
       exclusividad: json['exclusividad'],
       propuesta: json['propuesta'],
       ventaPendiente: json['ventaPendiente'],
-      fechaRegistro: DateTime.parse(json['fechaRegistro']),
+      fechaRegistro: json['fechaRegistro'],
       archivada: json['archivada'],
       visitas: json['visitas'],
+      imagenes: List<Imagen>.from(
+        json['imagenes'].map((x) => Imagen.fromJson(x)),
+      ),
+    );
+  }
+}
+
+class Imagen {
+  final int idImagen;
+  final String idPropiedad;
+  final String nombre;
+  final String ruta;
+  final dynamic propiedad;
+
+  Imagen({
+    required this.idImagen,
+    required this.idPropiedad,
+    required this.nombre,
+    required this.ruta,
+    required this.propiedad,
+  });
+
+  factory Imagen.fromJson(Map<String, dynamic> json) {
+    return Imagen(
+      idImagen: json['idImagen'],
+      idPropiedad: json['idPropiedad'],
+      nombre: json['nombre'],
+      ruta: json['ruta'],
+      propiedad: json['propiedad'],
     );
   }
 }
