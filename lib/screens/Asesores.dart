@@ -237,7 +237,7 @@ class AsesorTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'Darien', arguments: asesor);
+        Navigator.pushNamed(context, 'Darien', arguments: {'agentes': asesor});
       },
       child: Container(
         height: 80,

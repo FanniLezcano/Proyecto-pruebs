@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:remax_center/providers/noticias_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:remax_center/modelos/noticias_modelo.dart';
 
-class Noticias extends StatefulWidget {
-  const Noticias({super.key});
+class NoticiasScreen extends StatefulWidget {
+  const NoticiasScreen({super.key});
 
   @override
-  State<Noticias> createState() => _NoticiasState();
+  State<NoticiasScreen> createState() => _NoticiasScreenState();
 }
 
-class _NoticiasState extends State<Noticias> {
+class _NoticiasScreenState extends State<NoticiasScreen> {
   PageController _controller = PageController();
+  NoticiasProvider noticiasProviderController = NoticiasProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +33,16 @@ class _NoticiasState extends State<Noticias> {
             tabBackgroundColor: Color.fromARGB(255, 255, 255, 255),
             padding: EdgeInsets.all(10),
             tabs: [
-              //INICIO
               GButton(
                 icon: Icons.home,
                 text: "Inicio",
                 iconColor: Colors.white,
               ),
-              //BUSCAR
               GButton(
                 icon: Icons.search,
                 text: "Buscar",
                 iconColor: Colors.white,
               ),
-              //CONFIGURACION
               GButton(
                 icon: Icons.settings,
                 text: "Configuracion",
@@ -63,9 +63,7 @@ class _NoticiasState extends State<Noticias> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
-            child:
-                // TEXTO REMAX
-                Text(
+            child: Text(
               "RE/MAX",
               style: TextStyle(
                 fontSize: 54,
@@ -74,7 +72,6 @@ class _NoticiasState extends State<Noticias> {
               ),
             ),
           ),
-          //TEXTO CENTER
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 120),
             child: Text(
@@ -86,200 +83,200 @@ class _NoticiasState extends State<Noticias> {
             ),
           ),
           SafeArea(
-              child: Container(
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                    height: 210,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "NOTICIAS RE",
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 26, 29, 156)),
+                      ),
+                      Text(
+                        "/",
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.redAccent[700]),
+                      ),
+                      Text(
+                        "MAX CENTER",
+                        style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 26, 29, 156)),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Container(
+                      height: 420,
+                      child: FutureBuilder<List<Noticias>>(
+                        future: noticiasProviderController.getNoticiasByDate(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else if (!snapshot.hasData ||
+                              snapshot.data!.isEmpty) {
+                            return Center(
+                                child: Text('No hay datos disponibles.'));
+                          } else {
+                            return PageView.builder(
+                              controller: _controller,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                Noticias noticia = snapshot.data![index];
+                                return ContainerNoticias(
+                                  rutaImgen: noticia.rutaImagen,
+                                  contenido: noticia.contenido,
+                                  descripcion: noticia.descripcion,
+                                );
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SmoothPageIndicator(
+                    controller: _controller,
+                    count: 5, // Cambia esto por la cantidad de elementos
+                    effect: WormEffect(
+                      dotWidth: 8,
+                      dotHeight: 8,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ContainerNoticias extends StatefulWidget {
+  String rutaImgen;
+  String descripcion;
+  String contenido;
+
+  ContainerNoticias(
+      {required this.rutaImgen,
+      required this.contenido,
+      required this.descripcion});
+
+  @override
+  State<ContainerNoticias> createState() => _ContainerNoticiasState();
+}
+
+class _ContainerNoticiasState extends State<ContainerNoticias> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(35),
+        color: Colors.redAccent[700],
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            "NOTICIAS",
+            style: TextStyle(
+                fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(25),
             child: Column(
               children: [
                 Container(
-                  height: 210,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.white38,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: FadeInImage(
+                    placeholder: AssetImage('assets/cargando2.gif'),
+                    image: widget.rutaImgen != null
+                        ? NetworkImage(widget.rutaImgen)
+                            as ImageProvider<Object> // Especificar el tipo aquí
+                        : AssetImage('assets/no_image.jpg')
+                            as ImageProvider<Object>, // También aquí
+                    fit: BoxFit.contain,
+                  ),
                 ),
-                //TITULO NOTICIAS REMAX
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "NOTICIAS RE",
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 26, 29, 156)),
-                    ),
-                    Text(
-                      "/",
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent[700]),
-                    ),
-                    Text(
-                      "MAX CENTER",
-                      style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 26, 29, 156)),
-                    )
-                  ],
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  widget.descripcion,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: 25,
                 ),
-                //CONTENIDO DONDE IRAN LAS NOTICIAS
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    height: 450,
-                    width: 380,
-                    color: Color.fromARGB(0, 0, 0, 0),
-                    child: Stack(
-                      children: [
-                        PageView(
-                          controller: _controller,
-                          children: [
-                            // 1 EVENTOS
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(35),
-                                color: Colors.redAccent[700],
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "EVENTOS",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(25),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          height: 200,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white38,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                        ),
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                        Text(
-                                          "Contenido del evento",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            //2 FACEBOOK
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.redAccent[700],
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "FACEBOOK",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                            //3 TIKTOK
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.redAccent[700],
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "TIKTOK",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                            //4 YOUTUBE
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.redAccent[700],
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "YOUTUBE",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                            //5 INSTAGRAM
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: Colors.redAccent[700],
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "INSTAGRAM",
-                                    style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                Text(
+                  widget.contenido.substring(0, 150) + "...",
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                SmoothPageIndicator(controller: _controller, count: 5)
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.white)),
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        'noticiasDetalle',
+                        arguments: {
+                          'rutaImagen': widget.rutaImgen,
+                          'descripcion': widget.descripcion,
+                          'contenido': widget.contenido,
+                        },
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 5),
+                      child: Text(
+                        "Ver",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )),
               ],
             ),
-          ))
+          )
         ],
       ),
     );

@@ -2,11 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:remax_center/Agente.dart';
 import 'package:remax_center/Asesores.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
+import 'package:remax_center/modelos/recomendaciones_propiedades.dart';
 import 'package:remax_center/screens/Asesores.dart';
 
-class Darien extends StatelessWidget {
+import '../modelos/propiedades_modelo.dart';
+import '../providers/propiedades_provider.dart';
+
+class Darien extends StatefulWidget {
   final AgentesModelo asesor;
   const Darien({super.key, required this.asesor});
+
+  @override
+  State<Darien> createState() => _DarienState();
+}
+
+class _DarienState extends State<Darien> {
+  PropiedadesProvider propiedadesProviderController = PropiedadesProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -29,25 +40,6 @@ class Darien extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(78, 0, 0, 0),
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.search),
-                        border: InputBorder.none,
-                        hintText: "Buscar",
-                      ),
-                    ),
-                  )),
-            ),
             SizedBox(
               height: 10,
             ),
@@ -68,27 +60,37 @@ class Darien extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/Asesor/Darien.jpg")),
-                          color: Color.fromARGB(255, 116, 138, 233),
-                          shape: BoxShape.circle),
+                        color: Color.fromARGB(255, 116, 138, 233),
+                        shape: BoxShape.circle,
+                      ),
+                      child: ClipOval(
+                        child: FadeInImage(
+                          placeholder: AssetImage('assets/cargando2.gif'),
+                          image: widget.asesor.foto != null
+                              ? AssetImage('assets/${widget.asesor.foto}')
+                              : AssetImage('assets/no_image.jpg'),
+                          fit: BoxFit
+                              .cover, // Cambiado de BoxFit.contain a BoxFit.cover
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Container(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(
                             height: 20,
                           ),
                           Text(
-                            asesor.nombre +
+                            widget.asesor.nombre +
                                 " " +
-                                asesor.apellidoP +
+                                widget.asesor.apellidoP +
                                 " " +
-                                asesor.apellidoM,
+                                widget.asesor.apellidoM,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -105,7 +107,7 @@ class Darien extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Broker Owner",
+                                widget.asesor.tipo,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                               )
@@ -122,7 +124,7 @@ class Darien extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Broker Owner",
+                                widget.asesor.email,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                               )
@@ -139,7 +141,7 @@ class Darien extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Broker Owner",
+                                widget.asesor.telefono,
                                 style: TextStyle(
                                     fontSize: 14, color: Colors.white),
                               )
@@ -262,177 +264,34 @@ class Darien extends StatelessWidget {
               height: 10,
             ),
             Container(
-              height: 210,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Row(
-                      children: [
-                        //CONTEINER 1
-                        Container(
-                          height: 210,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 215,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 215,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              height: 300,
+              child: FutureBuilder<List<RecomendacionPropiedadModelo>>(
+                future: propiedadesProviderController
+                    .getRecomendacionesPropiedadesByAsesor(widget.asesor.id),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No hay datos disponibles.'));
+                  } else {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.all(16),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        RecomendacionPropiedadModelo propiedad =
+                            snapshot.data![index];
+                        return RecomendacionesTile(
+                            precio: propiedad.precio.toString(),
+                            tipo: propiedad.titulo,
+                            ubicacion: propiedad.estado,
+                            imagen: propiedad.imagenRuta);
+                      },
+                    );
+                  }
+                },
               ),
             ),
             SizedBox(
@@ -446,181 +305,133 @@ class Darien extends StatelessWidget {
               height: 15,
             ),
             Container(
-              height: 210,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 215,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 215,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 215,
-                          width: 195,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 189, 187, 187),
-                                      borderRadius: BorderRadius.circular(15)),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("Casa"),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.location_on),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Ubicacion")
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(Icons.price_check_rounded),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text("Precio")
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              height: 300,
+              child: FutureBuilder<List<PropiedadModelo>>(
+                future: propiedadesProviderController
+                    .getPropiedadesByAsesor(widget.asesor.id),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No hay datos disponibles.'));
+                  } else {
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.all(16),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        PropiedadModelo propiedad = snapshot.data![index];
+                        return RecomendacionesTile(
+                            precio: propiedad.precio.toString(),
+                            tipo: propiedad.titulo,
+                            ubicacion: propiedad.estado,
+                            imagen: propiedad.imagenes[0].ruta);
+                      },
+                    );
+                  }
+                },
               ),
             ),
           ],
         )),
+      ),
+    );
+  }
+}
+
+class RecomendacionesTile extends StatelessWidget {
+  RecomendacionesTile(
+      {Key? key,
+      required this.tipo,
+      required this.precio,
+      required this.ubicacion,
+      required this.imagen})
+      : super(key: key);
+
+  String tipo;
+  String precio;
+  String ubicacion;
+  String imagen;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 300,
+        width: 210,
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 100,
+                width: 190,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 189, 187, 187),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: FadeInImage(
+                    placeholder: AssetImage('assets/cargando.gif'),
+                    image: NetworkImage(imagen),
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 150,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      tipo,
+                      maxLines: 2,
+                      overflow: TextOverflow
+                          .ellipsis, // Esto añade puntos suspensivos (...) al final si el texto es demasiado largo
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.location_on),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(ubicacion)
+                ],
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.price_check_rounded),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(precio)
+                ],
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
