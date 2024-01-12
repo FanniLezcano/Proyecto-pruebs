@@ -38,10 +38,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                     height: screenHeight * 0.32,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(
-                          widget.propiedad.imagenes[0]
-                              .ruta, // Agrega la ruta correcta de tu imagen
-                        ),
+                        image: AssetImage("assets/no_image-jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -90,7 +87,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  widget.propiedad.titulo,
+                                  widget.propiedad.titulo ?? "",
                                   style: TextStyle(
                                     fontSize: screenHeight * 0.040,
                                     fontWeight: FontWeight.bold,
@@ -98,8 +95,9 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                                   ),
                                 ),
                                 Text(
-                                  widget.propiedad.calle +
-                                      widget.propiedad.numeroExterior,
+                                  (widget.propiedad.calle ?? "") +
+                                      "" +
+                                      (widget.propiedad.numeroExterior ?? ""),
                                   style: TextStyle(
                                       fontSize: screenHeight * 0.018,
                                       color: Colors.white,
@@ -255,7 +253,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                       children: [
                         _buildDataRow(
                             "Sector:",
-                            widget.propiedad.sector,
+                            widget.propiedad.sector ?? "",
                             TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: screenHeight * 0.016),
@@ -263,7 +261,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                             screenWidth),
                         _buildDataRow(
                             "Tipo:",
-                            widget.propiedad.tipo,
+                            widget.propiedad.tipo ?? "",
                             TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: screenHeight * 0.016),
@@ -271,7 +269,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                             screenWidth),
                         _buildDataRow(
                             "Operacion:",
-                            widget.propiedad.operacion,
+                            widget.propiedad.operacion ?? "",
                             TextStyle(
                                 fontWeight: FontWeight.w300,
                                 color: Colors.red,
@@ -280,7 +278,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                             screenWidth),
                         _buildDataRow(
                             "Estado:",
-                            widget.propiedad.estado,
+                            widget.propiedad.estado ?? "",
                             TextStyle(
                                 fontWeight: FontWeight.w300,
                                 color: Colors.green,
@@ -297,7 +295,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                             screenWidth),
                         _buildDataRow(
                             "Moneda:",
-                            widget.propiedad.moneda,
+                            widget.propiedad.moneda ?? "",
                             TextStyle(
                                 fontWeight: FontWeight.w300,
                                 fontSize: screenHeight * 0.016),
@@ -328,7 +326,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
             items: [
               _buildContainer(
                   "Características",
-                  widget.propiedad.caracteristicas,
+                  widget.propiedad.caracteristicas ?? "",
                   null,
                   screenHeight,
                   screenWidth),
@@ -337,8 +335,7 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
               _buildContainer(
                   "Imagen de la propiedad",
                   "Contenido 3",
-                  widget.propiedad.imagenes[0]
-                      .ruta, // Agrega la ruta correcta de tu imagen
+                  "", // Agrega la ruta correcta de tu imagen
                   screenHeight,
                   screenWidth),
             ],
@@ -400,8 +397,8 @@ class _PropiedadesDetalleScreenState extends State<PropiedadesDetalleScreen> {
                   ? SizedBox(
                       height: screenHeight * 0.140,
                       width: screenWidth * 0.550,
-                      child: Image.network(
-                        rutaImagen,
+                      child: Image.asset(
+                        "assets/no_image.jpg",
                         fit: BoxFit
                             .cover, // Ajusta el modo de ajuste según tus necesidades
                       ),

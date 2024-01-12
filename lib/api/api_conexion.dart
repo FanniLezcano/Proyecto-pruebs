@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiConnector {
-  static const String baseUrl = 'http://crudremax.somee.com/api';
-
+  //static const String baseUrl = 'http://crudremax.somee.com/api';
+  static const String baseUrl = 'http://rufapp-001-site1.etempurl.com/api';
   Future<List<Map<String, dynamic>>> get(String endpoint) async {
     final url = Uri.parse('$baseUrl/$endpoint');
 

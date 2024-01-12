@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
@@ -131,7 +133,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                             itemBuilder: (context, index) {
                               final asesor = snapshot.data![index];
                               return AsesorTile(
-                                icon: asesor.foto,
+                                icon: asesor.imagen,
                                 title: asesor.nombre + " " + asesor.apellidoM,
                                 title2: asesor.tipo,
                                 title3: asesor.especialidad,
@@ -149,14 +151,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
 }
 
 class AsesorTile extends StatelessWidget {
-  final String icon;
+  final String? icon;
   final String title;
   final String title2;
   final String title3;
 
   const AsesorTile(
       {Key? key,
-      required this.icon,
+      this.icon,
       required this.title,
       required this.title2,
       required this.title3})
@@ -173,14 +175,17 @@ class AsesorTile extends StatelessWidget {
         children: [
           SizedBox(height: 22),
           Container(
-            height: 110,
-            width: 110,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/no_image.jpg"),
-              ),
-              color: Colors.indigo[100],
-              shape: BoxShape.circle,
+            width: double.infinity,
+            height: 130,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              clipBehavior: Clip.antiAlias,
+              child: icon != null && icon != ""
+                  ? Image.memory(
+                      base64Decode(icon!), // Decodificar el Base64
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset('assets/no_image.jpg', fit: BoxFit.cover),
             ),
           ),
           SizedBox(height: 10),

@@ -1,6 +1,7 @@
 CREATE TABLE noticias (
-    id UNIQUEIDENTIFIER PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,
     rutaimagen VARCHAR(400),
     descripcion VARCHAR(1000),
-    contenido VARCHAR(MAX)
+    contenido LONGTEXT,
+    fecha_publicacion DATETIME
 );

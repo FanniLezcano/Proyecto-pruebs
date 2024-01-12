@@ -17,6 +17,7 @@ class AgentesModelo {
   String especialidad;
   DateTime fechaNacimiento;
   DateTime unionRemax;
+  String? imagen; // Cambia a String para almacenar la imagen como cadena Base64
 
   AgentesModelo({
     required this.id,
@@ -37,6 +38,7 @@ class AgentesModelo {
     required this.especialidad,
     required this.fechaNacimiento,
     required this.unionRemax,
+    this.imagen, // Inicializa el campo de imagenBit
   });
 
   factory AgentesModelo.fromJson(Map<String, dynamic> json) => AgentesModelo(
@@ -58,6 +60,8 @@ class AgentesModelo {
         especialidad: json["especialidad"],
         fechaNacimiento: DateTime.parse(json["fechaNacimiento"]),
         unionRemax: DateTime.parse(json["unionRemax"]),
+        imagen:
+            json["imagen"], // No se convierte a lista ya que es un solo valor
       );
 
   Map<String, dynamic> toJson() => {
@@ -79,5 +83,6 @@ class AgentesModelo {
         "especialidad": especialidad,
         "fechaNacimiento": fechaNacimiento.toIso8601String(),
         "unionRemax": unionRemax.toIso8601String(),
+        "imagen": imagen, // La cadena Base64 se mantiene tal cual
       };
 }

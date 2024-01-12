@@ -324,10 +324,13 @@ class _DarienState extends State<Darien> {
                       itemBuilder: (context, index) {
                         PropiedadModelo propiedad = snapshot.data![index];
                         return RecomendacionesTile(
-                            precio: propiedad.precio.toString(),
-                            tipo: propiedad.titulo,
-                            ubicacion: propiedad.estado,
-                            imagen: propiedad.imagenes[0].ruta);
+                          precio: propiedad.precio.toString(),
+                          tipo: propiedad.titulo ?? "No tiene título",
+                          ubicacion: propiedad.estado ?? "Sin estado",
+                          imagen: propiedad.imagenes.isNotEmpty
+                              ? propiedad.imagenes[0].ruta
+                              : "",
+                        );
                       },
                     );
                   }
@@ -357,6 +360,16 @@ class RecomendacionesTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String imageUrl;
+
+    if (imagen.isNotEmpty) {
+      String baseUrl =
+          'https://srv1167-files.hstgr.io/5c80ede7e8c416cd/files/public_html/';
+      imageUrl = baseUrl + imagen;
+    } else {
+      // Si la lista de imágenes está vacía, proporciona una URL predeterminada o realiza alguna acción alternativa.
+      imageUrl = '';
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -380,10 +393,13 @@ class RecomendacionesTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   child: FadeInImage(
                     placeholder: AssetImage('assets/cargando.gif'),
-                    image: NetworkImage(imagen),
+                    image: (imagen.isNotEmpty && imagen != null)
+                        ? NetworkImage(imageUrl)
+                        : AssetImage('assets/no_image.jpg')
+                            as ImageProvider<Object>,
                     fit: BoxFit.cover,
                     width: double.infinity,
-                    height: 150,
+                    height: 200,
                   ),
                 ),
               ),

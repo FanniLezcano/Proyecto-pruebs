@@ -1,5 +1,5 @@
 CREATE TABLE agentesInmobiliarios (
-    id uniqueidentifier not null,
+    id CHAR(36) NOT NULL,
     nombres VARCHAR(255) NOT NULL,
     apellidos VARCHAR(255) NOT NULL,
     genero VARCHAR(50),
@@ -10,5 +10,6 @@ CREATE TABLE agentesInmobiliarios (
     ubicacion VARCHAR(255),
     comoEnterado VARCHAR(255),
     interesRemax TEXT,
-    fechaRegistro DATETIME
+    fechaRegistro DATETIME,
+    PRIMARY KEY (id)
 );

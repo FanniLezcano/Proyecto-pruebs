@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:remax_center/modelos/agentes_modelo.dart';
@@ -195,8 +198,9 @@ class _AsesoresState extends State<Asesores> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               final asesor = snapshot.data![index];
+
                               return AsesorTile(
-                                  icon: asesor.foto,
+                                  icon: asesor.imagen,
                                   title: asesor.nombre + " " + asesor.apellidoM,
                                   title2: asesor.tipo,
                                   title3: asesor.especialidad,
@@ -219,14 +223,14 @@ class _AsesoresState extends State<Asesores> {
 
 class AsesorTile extends StatelessWidget {
   final AgentesModelo asesor;
-  final String icon;
+  final String? icon;
   final String title;
   final String title2;
   final String title3;
 
   const AsesorTile(
       {Key? key,
-      required this.icon,
+      this.icon,
       required this.title,
       required this.title2,
       required this.title3,
@@ -255,16 +259,16 @@ class AsesorTile extends StatelessWidget {
               height: 130,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                clipBehavior: Clip.antiAlias, // Prueba con esta configuración
-                child: FadeInImage(
-                  placeholder: AssetImage('assets/cargando2.gif'),
-                  image: icon != null
-                      ? AssetImage('assets/$icon')
-                      : AssetImage('assets/no_image.jpg'),
-                  fit: BoxFit.cover,
-                ),
+                clipBehavior: Clip.antiAlias,
+                child: icon != null && icon != ""
+                    ? Image.memory(
+                        base64Decode(icon!), // Decodificar el Base64
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset('assets/no_image.jpg', fit: BoxFit.cover),
               ),
             ),
+
             SizedBox(height: 10), // Ajusta según sea necesario
             Text(
               title,

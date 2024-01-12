@@ -210,6 +210,16 @@ class PropiedadesTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String imageUrl;
+
+    if (propiedad.imagenes.isNotEmpty) {
+      String baseUrl =
+          'https://srv1167-files.hstgr.io/5c80ede7e8c416cd/files/public_html/';
+      imageUrl = baseUrl + propiedad.imagenes[0].ruta;
+    } else {
+      // Si la lista de imágenes está vacía, proporciona una URL predeterminada o realiza alguna acción alternativa.
+      imageUrl = '';
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -221,13 +231,16 @@ class PropiedadesTile extends StatelessWidget {
           children: [
             // Parte superior con la imagen
             FadeInImage(
-              placeholder:
-                  AssetImage('assets/cargando.gif'), // Imagen de transición
-              image: NetworkImage(propiedad.imagenes[0].ruta),
+              placeholder: AssetImage('assets/cargando.gif'),
+              image: (propiedad.imagenes.isNotEmpty &&
+                      propiedad.imagenes[0].ruta != null)
+                  ? NetworkImage(imageUrl)
+                  : AssetImage('assets/no_image.jpg') as ImageProvider<Object>,
               fit: BoxFit.cover,
               width: double.infinity,
-              height: 150,
+              height: 200,
             ),
+
             SizedBox(height: 10),
             // Parte inferior con la información
             Padding(
@@ -235,7 +248,7 @@ class PropiedadesTile extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    propiedad.titulo,
+                    propiedad.titulo ?? "No tiene titulo",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -244,19 +257,23 @@ class PropiedadesTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    propiedad.calle + " " + propiedad.numeroExterior,
+                    (propiedad.calle ?? "") +
+                        " " +
+                        (propiedad.numeroExterior ?? ""),
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   Text(
-                    propiedad.estado,
+                    propiedad.estado ?? "No tiene estado",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   Text(
-                    propiedad.operacion,
+                    propiedad.operacion ?? "Venta",
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   Text(
-                    propiedad.moneda + " " + propiedad.precio.toString(),
+                    (propiedad.moneda ?? "") +
+                        " " +
+                        propiedad.precio.toString(),
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   ElevatedButton(
