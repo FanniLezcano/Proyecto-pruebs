@@ -172,29 +172,7 @@ class Sesion extends StatelessWidget {
             ),
 
             //OLVIDASTE LA CONTRASEÑA
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "¿Olvidaste tu Contraseña?",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Recuperar(),
-                      ));
-                    },
-                    child: Text(
-                      "Recuperar",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.redAccent[700]),
-                    )),
-              ],
-            ),
+
           ],
         ),
       )),
