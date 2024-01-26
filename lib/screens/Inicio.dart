@@ -76,7 +76,7 @@ class Inicio extends StatelessWidget {
                     //Declaracion para pasar a otra pantalla
                     onPressed: () {
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => Sesion()));
+                          MaterialPageRoute(builder: (context) => Bienvenida()));
                     },
                     label: const Text(
                       "   Bienvenido   ",
